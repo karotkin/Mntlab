@@ -1,0 +1,47 @@
+#!/bin/sh
+
+# chkconfig: 345 99 10
+# description: apache tomcat auto start-stop script.
+
+. /etc/init.d/functions
+
+RETVAL=0
+
+start()
+{
+  echo -n "Starting tomcat"
+  su - tomcat -c "sh /opt/apache/tomcat//current/bin/startup.sh"
+  echo
+}
+
+stop()
+{
+  echo -n "Stopping tomcat"
+  su - tomcat -c "sh /opt/apache/tomcat//current/bin/shutdown.sh"
+  echo
+}
+
+status()
+{
+  echo "tomcat is running"
+}
+
+case "$1" in
+start)
+        start
+        ;;
+stop)
+        stop
+        ;;
+status)
+        status
+        ;;
+restart)
+        stop
+        start
+        ;;
+*)
+        echo $"Usage: $0 {start|stop|status|restart}"
+        exit 1
+esac
+

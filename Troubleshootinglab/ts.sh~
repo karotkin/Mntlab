@@ -1,0 +1,34 @@
+#!/bin/bash
+#Changing files of httpd to fix mistakes into it, httpd stops at first
+service httpd stop
+cp -r /vagrant/httpd.conf /etc/httpd/conf/
+cp -r /vagrant/workers.properties /etc/httpd/conf.d/
+cp -r /vagrant/vhost.conf /etc/httpd/conf.d/
+
+#Changing bashrc file and starting java for tomcat working
+sed -i '/export JAVA_HOME=\/tmp/d' /home/tomcat/.bashrc
+sed -i '/export CATALINA_HOME=\/tmp/d' /home/tomcat/.bashrc
+alternatives --config java <<< 1
+
+#Changing permission for tomcat user to tomcat's logs 
+cd /opt/apache/tomcat/
+chown tomcat -R .
+chown tomcat:tomcat /opt/apache/tomcat/7.0.62/logs/
+
+#Changing bin init file for tomcat correct start
+cp -r /vagrant/tomcat /etc/init.d/
+
+#Set -i permisson for iptables and chagne this file to correct 
+cd /etc/sysconfig
+chattr -i iptables
+cp -r /vagrant/iptables /etc/sysconfig/
+
+#Restart iptables, httpd and tomcat
+service iptables restart
+service tomcat start
+service httpd start
+
+#Checking configuration of httpd and tomcat
+chkconfig tomcat on
+chkconfig httpd on
+
