@@ -15,4 +15,4 @@
 Exit questions:
 
 What java version is installed?
-(sources/JavaVersion1.png)
+![alt tag](http://url/sources/JavaVersion1.png)
