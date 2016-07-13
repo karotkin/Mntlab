@@ -12,4 +12,7 @@
 | 9  |  java inconsistencies | java -version, uptime, alternatives --config java, netstat –natupl (pipeline) grep java | 20 minutes  | After we're trying to restart tomcat but see the error with java. We are checking which java installed on virtual machine, we've checked which version is using right now and after we are chaning to right version of java X64 | 60 minutes |
 | 10  |  iptables troubles | iptables -L -n netsat -tulnp chattr -i iptables | 20 minutes  | We see that iptables dosen't work correctly and trying to restart it, stopping is failed and it haven't started. We are watchin that permission for file /etc/sysconfig/iptables is +i so we are changing the permission for it by command  cd /etc/sysconfig and chattr -i iptables after we see that we haven't listening for 80 port and change this line with ESTABLISHED "-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT" after we've restarted iptables and it works | 60 minutes |
 
+Exit questions:
 
+What java version is installed?
+[JavaVersion1](sources/JavaVersion1.png)
