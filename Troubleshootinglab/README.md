@@ -14,6 +14,47 @@
 
 Exit questions:
 
-What java version is installed?
-
+1. What java version is installed?
+ We can check it which version of java is installed. java -version
 ![alt tag](https://github.com/karotkin/Mntlab/blob/Mntlab/Troubleshootinglab/source/JavaVersion1.png)
+Java Version build 1.7.0_79-b15
+Java Version X64 build 24.79-b02, mixed mode
+Also we can check it via alternative --config java
+
+2. How was it installed and configured?
+It was installed by downloading java.gz.tar and extrated to directory /opt/java and after we are update-alternatives
+update-alternatives --install /usr/bin/java java /opt/java/jdk1.8.0_45/bin/java 100  
+update-alternatives --config java
+
+It can be installed by yum install java (and adding to yumm.repo script about java) after install update-alternatives --config java
+3. Where are log files of tomcat and httpd?
+Logs of tomcat are in:
+![alt tag](https://github.com/karotkin/Mntlab/blob/Mntlab/Troubleshootinglab/source/tomcat-logs.png?raw=true)
+
+Logs of httpd are in:
+![alt tag](https://github.com/karotkin/Mntlab/blob/Mntlab/Troubleshootinglab/source/httpd-.png?raw=true)
+
+4. Where is JAVA_HOME and what is it?
+
+JAVA_HOME is Java Environment Variables. JAVA_HOME points on directory which Java runtime environment (JRE) was installed at our PC.
+
+5. Where is tomcat installed?
+cd /opt/apache/tomcat/7.0.62/
+![alt tag](https://github.com/karotkin/Mntlab/blob/Mntlab/Troubleshootinglab/source/tomcat-installed.png?raw=true)
+
+
+6. What is CATALINA_HOME?
+
+It is a variable that specified the home location of tomcat service.
+
+7. What users run httpd and tomcat processes? How is it configured?
+ps -ef | grep httpd
+![alt tag](https://github.com/karotkin/Mntlab/blob/Mntlab/Troubleshootinglab/source/process%20httpd%20via.png?raw=true)
+ps -ef | grep tomcat
+![alt tag](https://github.com/karotkin/Mntlab/blob/Mntlab/Troubleshootinglab/source/tomcat%20users%20started.png?raw=true)
+
+8. What configuration files are used to make components work with each other?
+
+Tomcat can not heard by httpd. httpd will not work with crushed iptables. So we are chaning: httpd.conf, vhosts.conf, workers.properties for correct running of httpd and add jk_module to start new directives. And change server.xml, into tomcat file and also change file /etc/init.d/tomcat for running of tomcat after restart.
+
+9. What does it mean: “load average: 1.18, 0.95, 0.83”?
