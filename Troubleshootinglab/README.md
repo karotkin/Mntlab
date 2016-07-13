@@ -15,4 +15,4 @@
 Exit questions:
 
 What java version is installed?
-[JavaVersion1](sources/JavaVersion1.png)
+(sources/JavaVersion1.png)
