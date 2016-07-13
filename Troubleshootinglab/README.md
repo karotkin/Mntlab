@@ -15,4 +15,5 @@
 Exit questions:
 
 What java version is installed?
-![alt tag](http://url/sources/JavaVersion1.png)
+
+![alt tag](https://github.com/karotkin/Mntlab/blob/Mntlab/Troubleshootinglab/source/JavaVersion1.png)
